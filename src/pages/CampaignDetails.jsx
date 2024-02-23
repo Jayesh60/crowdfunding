@@ -36,6 +36,7 @@ const CampaignDetails = () => {
     navigate('/')
     setIsLoading(false);
   }
+  console.log("state",state)
 
   return (
     <div>
@@ -67,12 +68,12 @@ const CampaignDetails = () => {
                 <img src={logo} alt="user" className="w-[60%] h-[60%] object-contain"/>
               </div>
               <div>
-                <h4 className="font-epilogue font-semibold text-[14px] text-black break-all">{state.owner}</h4>
-                <p className="mt-[4px] font-epilogue font-normal text-[12px] text-[#808191]">10 Campaigns</p>
+                <h4 className="font-epilogue font-semibold text-[14px] text-black break-all">{state.name}</h4>
+                <p className="mt-[4px] font-epilogue font-normal text-[12px] text-[#808191]">{state.owner}</p>
               </div>
             </div>
           </div>
-
+          
           <div>
             <h4 className="font-epilogue font-semibold text-[18px] text-black uppercase">Story</h4>
 

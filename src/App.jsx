@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 //import { Sidebar, Navbar } from './components'
@@ -9,6 +9,20 @@ import { useStateContext } from './context';
 
 const App = () => {
   const {activeTheme, setActiveTheme} = useStateContext();
+  useEffect(() => {
+    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+    const handleDarkModeChange = (event) => {
+      setActiveTheme(event.matches);
+    };
+
+    darkModeMediaQuery.addEventListener('change', handleDarkModeChange);
+    setActiveTheme(darkModeMediaQuery.matches);
+
+    return () => {
+      darkModeMediaQuery.removeEventListener('change', handleDarkModeChange);
+    };
+  }, []);
 
   return (
     <div className={`relative sm:-8 p-4 ${activeTheme ? 'bg-black':'bg-[#CFE2F3]'} min-h-screen flex flex-row transition duration-500`}>

@@ -16,7 +16,7 @@ export const StateContextProvider = ({ children }) => {
   const disConnect = useDisconnect();
 
   // true means Light 
-  const [activeTheme, setActiveTheme] = useState(true);
+  const [activeTheme, setActiveTheme] = useState(false);
 
   const publishCampaign = async (form) => {
     try {

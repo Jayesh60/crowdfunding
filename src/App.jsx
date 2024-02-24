@@ -5,10 +5,13 @@ import { Route, Routes } from 'react-router-dom';
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 import { CampaignDetails, CreateCampaign, Home, Profile } from './pages';
+import { useStateContext } from './context';
 
 const App = () => {
+  const {activeTheme, setActiveTheme} = useStateContext();
+
   return (
-    <div className="relative sm:-8 p-4 bg-[#CFE2F3] min-h-screen flex flex-row">
+    <div className={`relative sm:-8 p-4 ${activeTheme ? 'bg-black':'bg-[#CFE2F3]'} min-h-screen flex flex-row`}>
       <div className="sm:flex hidden mr-10 relative">
         <Sidebar />
       </div>

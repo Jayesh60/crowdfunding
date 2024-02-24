@@ -74,13 +74,13 @@ const CreateCampaign = () => {
           />
         </div>
 
-      <label htmlFor="category" className="text-green-400">Category *</label>
+      <label htmlFor="category" className="text-green">Category *</label>
         <select
           placeholder="Category"
           id="category"
           value={form.category}
           onChange={(e) => handleFormFieldChange("category", e)}
-          className="bg-transparent cursor-pointer font-epilogue text-green-400 text-[14px] rounded-[10px] sm:min-w-[300px] py-[15px] sm:px-[25px] px-[15px] outline-none border-[1px] border-[#3a3a43] "
+          className="bg-transparent cursor-pointer font-epilogue text-green text-[14px] rounded-[10px] sm:min-w-[300px] py-[15px] sm:px-[25px] px-[15px] outline-none border-[1px] border-[#3a3a43] "
           required
         >
           <option  defaultChecked value="Social Cause">Social Cause</option>

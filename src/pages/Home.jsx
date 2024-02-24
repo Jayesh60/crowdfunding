@@ -11,6 +11,7 @@ const Home = () => {
   const [searchedResults, setSearchedResults] = useState([]);
   const [searchTimeout, setSearchTimeout] = useState(null);
   const { address, contract, getCampaigns } = useStateContext();
+  const { activeTheme, setActiveTheme } = useStateContext();
 
   const [ActiveCategory, setActiveCategory] = useState("All");
 
@@ -85,9 +86,12 @@ const Home = () => {
               key={index}
               onClick={() => setActiveCategory(item)}
               className={`${
-                ActiveCategory === item
-                  ? " bg-black text-green-500 font-semibold"
-                  : ""
+                ActiveCategory === item ? activeTheme
+                    ? "bg-light-gray text-green font-semibold"
+                    : " bg-black text-green font-semibold"
+                : activeTheme
+                  ? " text-green"
+                  : " text-black"
               } md:px-6 px-3 py-1.5 rounded-md max-md:text-xs  md:py-1.5 cursor-pointer transition duration-300`}
             >
               {item}

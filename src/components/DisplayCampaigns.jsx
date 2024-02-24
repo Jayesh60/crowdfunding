@@ -4,8 +4,10 @@ import { v4 as uuidv4 } from "uuid";
 import FundCard from "./FundCard";
 import { loader } from "../assets";
 import { daysLeft } from "../utils";
+import { useStateContext } from "../context";
 
 const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
+  const {activeTheme, setActiveTheme} = useStateContext();
   const navigate = useNavigate();
 
   const handleNavigate = (campaign) => {
@@ -14,19 +16,19 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
 
   const dataList = campaigns.filter((item) => {
     const daysL = daysLeft(item.deadline);
-    return daysL >= 0;
+    return daysL >= 1;
   });
 
-  console.log('dataFeed', dataList)
+  // console.log('dataFeed', dataList)
 
   
   return (
     <div>
-      {/* <h1 className="font-epilogue font-semibold text-[18px] text-black text-left">
+      <h1 className= {`${activeTheme? "text-white" : "text-black"} font-epilogue font-semibold py-2  `}>
         {title} ({dataList.length})
-      </h1> */}
+      </h1>
 
-      <div className="flex flex-wrap mt-[20px] gap-[26px]">
+      <div className="flex flex-wrap gap-[26px]">
         {isLoading && (
           <img
             src={loader}

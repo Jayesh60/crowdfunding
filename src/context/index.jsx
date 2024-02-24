@@ -1,4 +1,4 @@
-import React, { useContext, createContext } from 'react';
+import React, { useContext, createContext, useState } from 'react';
 
 import { useAddress, useContract, useMetamask, useContractWrite, useDisconnect } from '@thirdweb-dev/react';
 import { ethers } from 'ethers';
@@ -14,6 +14,9 @@ export const StateContextProvider = ({ children }) => {
   const address = useAddress();
   const connect = useMetamask();
   const disConnect = useDisconnect();
+
+  // true means Light 
+  const [activeTheme, setActiveTheme] = useState(true);
 
   const publishCampaign = async (form) => {
     try {
@@ -96,7 +99,9 @@ export const StateContextProvider = ({ children }) => {
         getUserCampaigns,
         donate,
         getDonations,
-        disConnect
+        disConnect,
+        activeTheme,
+        setActiveTheme
       }}
     >
       {children}

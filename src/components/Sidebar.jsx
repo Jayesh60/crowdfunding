@@ -4,11 +4,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { logo, sun } from "../assets";
 import { navlinks } from "../constants";
 import { useDisconnect } from "@thirdweb-dev/react";
+import { useStateContext } from "../context";
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const disConnect = useDisconnect();
   const [isActive, setIsActive] = useState("dashboard");
+  const {activeTheme, setActiveTheme} = useStateContext();
+
 
   const Icon = ({ styles, name, imgUrl, isActive, disabled, handleClick }) => (
     <div
@@ -56,7 +59,7 @@ const Sidebar = () => {
           ))}
         </div>
 
-        <Icon styles="bg-[#1c1c24] shadow-secondary" imgUrl={sun} />
+        <Icon styles="bg-[#1c1c24]" imgUrl={sun} handleClick={()=> setActiveTheme((p)=> !p) } />
       </div>
     </div>
   );

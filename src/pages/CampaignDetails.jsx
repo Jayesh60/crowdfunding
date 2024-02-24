@@ -10,7 +10,7 @@ import { logo, thirdweb } from '../assets';
 const CampaignDetails = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const { donate, getDonations, contract, address } = useStateContext();
+  const { donate, getDonations, contract, address, activeTheme, setActiveTheme } = useStateContext();
 
   const [isLoading, setIsLoading] = useState(false);
   const [amount, setAmount] = useState('');
@@ -36,7 +36,7 @@ const CampaignDetails = () => {
     navigate('/')
     setIsLoading(false);
   }
-  console.log("state",state)
+  // console.log("state",state)
 
   return (
     <div>
@@ -61,21 +61,21 @@ const CampaignDetails = () => {
       <div className="mt-[60px] flex lg:flex-row flex-col gap-5">
         <div className="flex-[2] flex flex-col gap-[40px]">
           <div>
-            <h4 className="font-epilogue font-semibold text-[18px] text-black uppercase">Creator</h4>
+            <h4 className={`${activeTheme ? "text-white" : "text-black"} font-epilogue font-semibold text-[18px]  uppercase`}>Creator</h4>
 
             <div className="mt-[20px] flex flex-row items-center flex-wrap gap-[14px]">
               <div className="w-[52px] h-[52px] flex items-center justify-center rounded-full bg-[#2c2f32] cursor-pointer">
                 <img src={logo} alt="user" className="w-[60%] h-[60%] object-contain"/>
               </div>
               <div>
-                <h4 className="font-epilogue font-semibold text-[14px] text-black break-all">{state.name}</h4>
+                <h4 className={`${activeTheme ? "text-white" : "text-black"} font-epilogue font-semibold text-[14px]  uppercase`}>{state.name}</h4>
                 <p className="mt-[4px] font-epilogue font-normal text-[12px] text-[#808191]">{state.owner}</p>
               </div>
             </div>
           </div>
           
           <div>
-            <h4 className="font-epilogue font-semibold text-[18px] text-black uppercase">Story</h4>
+            <h4 className={`${activeTheme ? "text-white" : "text-black"} font-epilogue font-semibold text-[18px]  uppercase`}>Story</h4>
 
               <div className="mt-[20px]">
                 <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">{state.description}</p>
@@ -83,7 +83,7 @@ const CampaignDetails = () => {
           </div>
 
           <div>
-            <h4 className="font-epilogue font-semibold text-[18px] text-black uppercase">Donators</h4>
+            <h4 className={`${activeTheme ? "text-white" : "text-black"} font-epilogue font-semibold text-[18px]  uppercase`}>Donators</h4>
 
               <div className="mt-[20px] flex flex-col gap-4">
                 {donators.length > 0 ? donators.map((item, index) => (

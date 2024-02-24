@@ -6,13 +6,14 @@ import { useStateContext } from '../context'
 const Profile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [campaigns, setCampaigns] = useState([]);
+  const {activeTheme, setActiveTheme} = useStateContext();
 
   const { address, contract, getUserCampaigns } = useStateContext();
 
   const fetchUserCampaigns = async () => {
     setIsLoading(true);
     const data = await getUserCampaigns();
-    console.log(data)
+    // console.log(data)
     setCampaigns(data);
     setIsLoading(false);
   }

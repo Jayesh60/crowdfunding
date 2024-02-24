@@ -11,7 +11,7 @@ const App = () => {
   const {activeTheme, setActiveTheme} = useStateContext();
 
   return (
-    <div className={`relative sm:-8 p-4 ${activeTheme ? 'bg-black':'bg-[#CFE2F3]'} min-h-screen flex flex-row`}>
+    <div className={`relative sm:-8 p-4 ${activeTheme ? 'bg-black':'bg-[#CFE2F3]'} min-h-screen flex flex-row transition duration-500`}>
       <div className="sm:flex hidden mr-10 relative">
         <Sidebar />
       </div>

@@ -31,12 +31,12 @@ const CampaignDetails = () => {
   const handleDonate = async () => {
     setIsLoading(true);
 
-    await donate(state.pId, amount); 
+    await donate(state.owner, amount); 
 
     navigate('/')
     setIsLoading(false);
   }
-  // console.log("state",state)
+  console.log("state",state)
 
   return (
     <div>

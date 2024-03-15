@@ -55,6 +55,7 @@ const Sidebar = () => {
                   navigate(link.link);
                 }
               }}
+              
             />
           ))}
         </div>

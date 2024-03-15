@@ -6,6 +6,7 @@ import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 import { CampaignDetails, CreateCampaign, Home, Profile } from './pages';
 import { useStateContext } from './context';
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   const {activeTheme, setActiveTheme} = useStateContext();
@@ -41,6 +42,7 @@ const App = () => {
           <Route path="/campaign-details/:id" element={<CampaignDetails />} />
         </Routes>
       </div>
+      <Toaster/>
     </div>
   )
 }

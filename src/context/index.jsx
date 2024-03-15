@@ -8,7 +8,7 @@ const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
   // category updated 
-  const { contract } = useContract('0xC69CbeaFAD945a2cCBa6a652CEB625b53E4Bb4c6');
+  const { contract } = useContract('0x96d5eF245636C875b5dC202bc36D9Ad9Ea074279');
   const { mutateAsync: createCampaign } = useContractWrite(contract, 'createCampaign');
   // console.log(contract)
   const address = useAddress();
@@ -53,7 +53,6 @@ export const StateContextProvider = ({ children }) => {
       image: campaign.image,
       pId: i
     }));
-
     return parsedCampaings;
   }
 

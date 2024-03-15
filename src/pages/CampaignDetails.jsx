@@ -7,6 +7,7 @@ import { CountBox, CustomButton, Loader } from "../components";
 import { calculateBarPercentage, daysLeft } from "../utils";
 import { logo, thirdweb } from "../assets";
 import ShareBtn from "../components/ShareBtn";
+import toast from "react-hot-toast";
 
 const CampaignDetails = () => {
   const { state } = useLocation();
@@ -38,13 +39,16 @@ const CampaignDetails = () => {
 
   const handleDonate = async () => {
     setIsLoading(true);
-
-    await donate(state.owner, amount);
-
-    navigate("/");
-    setIsLoading(false);
+    try {
+      await donate(state.pId, amount);
+      toast.success("Donated Successfully!");
+      navigate("/");
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+      toast.error("Something went wrong...");
+    }
   };
-  console.log("state", state);
 
   return (
     <div>
@@ -168,11 +172,17 @@ const CampaignDetails = () => {
           <div className="pb-6">
             <ShareBtn description={"Help me with Donations"} />
           </div>
-          <h4 className="font-epilogue font-semibold text-[18px] text-black uppercase">
+          <h4
+            className={`${
+              activeTheme ? "text-white" : "text-black"
+            } font-epilogue font-semibold text-[18px]  uppercase`}
+          >
             Fund
           </h4>
           <div className="mt-3 flex flex-col p-4 bg-[#1c1c24] rounded-[10px]">
-            <p className="font-epilogue fount-medium text-[20px] leading-[30px] text-center text-[#808191]">
+            <p
+              className={`font-epilogue fount-medium text-[20px] leading-[30px] text-center text-[#808191]`}
+            >
               Fund the campaign
             </p>
             <div className="mt-[30px]">

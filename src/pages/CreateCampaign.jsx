@@ -6,6 +6,7 @@ import { useStateContext } from "../context";
 import { money } from "../assets";
 import { CustomButton, FormField } from "../components";
 import { checkIfImage } from "../utils";
+import toast from "react-hot-toast";
 
 const CreateCampaign = () => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const CreateCampaign = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("form",form);
+    // console.log("form",form);
     checkIfImage(form.image, async (exists) => {
       if (exists) {
         setIsLoading(true);
@@ -37,8 +38,10 @@ const CreateCampaign = () => {
         });
         setIsLoading(false);
         navigate("/");
+        toast.success('Campaign Created!')
       } else {
-        alert("Provide valid image URL");
+        // alert("Provide valid image URL");
+        toast.error("Not an Image")
         setForm({ ...form, image: "" });
       }
     });

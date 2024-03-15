@@ -1,5 +1,6 @@
 import { useStateContext } from "../context";
 import { facebook, linkedin, whatsapp, x } from "../assets";
+import toast from "react-hot-toast";
 
 const ShareBtn = ({ description }) => {
   const url = window.location.href;
@@ -31,12 +32,12 @@ const ShareBtn = ({ description }) => {
           <img src={x} alt="" className="h-8" />
         </a>
 
-        <a
-          href={`https://www.linkedin.com/shareArticle?mini=true&url=${url}`}
+        {/* <a
+          href={`https://www.linkedin.com/sharing/share-offsite/url=${url}?mini=true&`}
           target="_blank"
         >
           <img src={linkedin} alt="" className="h-8" />
-        </a>
+        </a> */}
 
         {/* Whatsapp */}
         <a
@@ -47,6 +48,21 @@ const ShareBtn = ({ description }) => {
           <img src={whatsapp} alt="" className="h-8" />
         </a>
         {/* Whatsapp */}
+
+        <div
+          className="cursor-pointer"
+          onClick={() => {
+            navigator.clipboard.writeText(url);
+            toast.success('copied')
+          }}
+        >
+          <img
+            width="32"
+            height="32"
+            src="https://img.icons8.com/color/32/copy-link.png"
+            alt="copy-link"
+          />
+        </div>
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
 
   const dataList = campaigns.filter((item) => {
     const daysL = daysLeft(item.deadline);
-    return daysL >= 1;
+    return daysL >= 0;
   });
 
   // console.log('dataFeed', dataList)

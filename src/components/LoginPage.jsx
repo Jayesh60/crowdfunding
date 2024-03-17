@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { db } from "../utils/firebase";
 import { StateContextProvider } from "../context";
+import { logo } from "../assets";
 
 const LoginPage = () => {
   const [data, setData] = useState({
@@ -49,7 +50,7 @@ const LoginPage = () => {
   return (
     <div className="inset-0 w-full bg-light-gray text-white flex items-center justify-center h-[100vh] absolute z-50">
       <div className="h-fit bg-black md:w-[30%] w-[90%] flex flex-col p-6 px-8 items-center justify-center rounded-md">
-        <img src="/src/assets/logo.svg" alt="" className="h-24" />
+        <img src={logo} alt="" className="h-24" />
         <form
           onSubmit={handleLoginSubmit}
           className="pt-2 w-full flex flex-col gap-4"

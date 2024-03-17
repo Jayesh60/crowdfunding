@@ -12,6 +12,7 @@ import {
   query,
 } from "firebase/firestore";
 import toast from "react-hot-toast";
+import { logo } from "../assets";
 
 const SignUpPage = () => {
   const [data, setData] = useState({
@@ -59,7 +60,7 @@ const SignUpPage = () => {
   return (
     <div className="inset-0 w-full bg-light-gray text-white flex items-center justify-center h-[100vh] absolute z-50">
       <div className="h-fit bg-black md:w-[30%] w-[90%] flex flex-col p-6 px-8 items-center justify-center rounded-md">
-        <img src="/src/assets/logo.svg" alt="" className="h-24" />
+      <img src={logo} alt="" className="h-24" />
         <form
           onSubmit={handleSignUp}
           className="pt-2 w-full flex flex-col gap-4"

@@ -36,7 +36,7 @@ const App = () => {
     if (!Sessionuser) {
       navigate("/login");
     }
-  }, [navigate, user]);
+  }, [user]);
 
   return (
     <div

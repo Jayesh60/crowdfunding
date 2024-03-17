@@ -1,45 +1,56 @@
-import React, { useContext, createContext, useState } from 'react';
+import React, { useContext, createContext, useState } from "react";
 
-import { useAddress, useContract, useMetamask, useContractWrite, useDisconnect } from '@thirdweb-dev/react';
-import { ethers } from 'ethers';
-import { EditionMetadataWithOwnerOutputSchema } from '@thirdweb-dev/sdk';
+import {
+  useAddress,
+  useContract,
+  useMetamask,
+  useContractWrite,
+  useDisconnect,
+} from "@thirdweb-dev/react";
+import { ethers } from "ethers";
+import { EditionMetadataWithOwnerOutputSchema } from "@thirdweb-dev/sdk";
 
 const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
-  // category updated 
-  const { contract } = useContract('0x96d5eF245636C875b5dC202bc36D9Ad9Ea074279');
-  const { mutateAsync: createCampaign } = useContractWrite(contract, 'createCampaign');
+  // category updated
+  const { contract } = useContract(
+    "0x96d5eF245636C875b5dC202bc36D9Ad9Ea074279"
+  );
+  const { mutateAsync: createCampaign } = useContractWrite(
+    contract,
+    "createCampaign"
+  );
   // console.log(contract)
   const address = useAddress();
   const connect = useMetamask();
   const disConnect = useDisconnect();
 
-  // true means Light 
+  // true means Light
   const [activeTheme, setActiveTheme] = useState(false);
 
   const publishCampaign = async (form) => {
     try {
       const data = await createCampaign({
-				args: [
-					address, // owner
+        args: [
+          address, // owner
           form.name,
-					form.title, // title
+          form.title, // title
           form.category,
-					form.description, // description
-					form.target,
-					new Date(form.deadline).getTime(), // deadline,
-					form.image,
-				],
-			});
-      console.log("contract call success", data)
+          form.description, // description
+          form.target,
+          new Date(form.deadline).getTime(), // deadline,
+          form.image,
+        ],
+      });
+      console.log("contract call success", data);
     } catch (error) {
-      console.log("contract call failure", error)
+      console.log("contract call failure", error);
     }
-  }
+  };
 
   const getCampaigns = async () => {
-    const campaigns = await contract.call('getCampaigns');
+    const campaigns = await contract.call("getCampaigns");
 
     const parsedCampaings = campaigns.map((campaign, i) => ({
       owner: campaign.owner,
@@ -49,47 +60,55 @@ export const StateContextProvider = ({ children }) => {
       description: campaign.description,
       target: ethers.utils.formatEther(campaign.target.toString()),
       deadline: campaign.deadline.toNumber(),
-      amountCollected: ethers.utils.formatEther(campaign.amountCollected.toString()),
+      amountCollected: ethers.utils.formatEther(
+        campaign.amountCollected.toString()
+      ),
       image: campaign.image,
-      pId: i
+      pId: i,
     }));
     return parsedCampaings;
-  }
+  };
 
   const getUserCampaigns = async () => {
     const allCampaigns = await getCampaigns();
 
-    const filteredCampaigns = allCampaigns.filter((campaign) => campaign.owner === address);
+    const filteredCampaigns = allCampaigns.filter(
+      (campaign) => campaign.owner === address
+    );
 
     return filteredCampaigns;
-  }
+  };
 
   const donate = async (pId, amount) => {
-    const data = await contract.call('donateToCampaign', [pId], { value: ethers.utils.parseEther(amount)});
+    const data = await contract.call("donateToCampaign", [pId], {
+      value: ethers.utils.parseEther(amount),
+    });
 
     return data;
-  }
+  };
 
   const getDonations = async (pId) => {
-    const donations = await contract.call('getDonators', [pId]);
+    const donations = await contract.call("getDonators", [pId]);
     const numberOfDonations = donations[0].length;
 
     const parsedDonations = [];
 
-    for(let i = 0; i < numberOfDonations; i++) {
+    for (let i = 0; i < numberOfDonations; i++) {
       parsedDonations.push({
         donator: donations[0][i],
-        donation: ethers.utils.formatEther(donations[1][i].toString())
-      })
+        donation: ethers.utils.formatEther(donations[1][i].toString()),
+      });
     }
 
     return parsedDonations;
-  }
+  };
 
+  const [user, setUser] = useState({});
 
   return (
     <StateContext.Provider
-      value={{ 
+      value={{
+        user, setUser,
         address,
         contract,
         connect,
@@ -100,12 +119,12 @@ export const StateContextProvider = ({ children }) => {
         getDonations,
         disConnect,
         activeTheme,
-        setActiveTheme
+        setActiveTheme,
       }}
     >
       {children}
     </StateContext.Provider>
-  )
-}
+  );
+};
 
 export const useStateContext = () => useContext(StateContext);

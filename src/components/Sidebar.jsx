@@ -10,8 +10,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const disConnect = useDisconnect();
   const [isActive, setIsActive] = useState("dashboard");
-  const {activeTheme, setActiveTheme} = useStateContext();
-
+  const { activeTheme, setActiveTheme, user, setUser } = useStateContext();
 
   const Icon = ({ styles, name, imgUrl, isActive, disabled, handleClick }) => (
     <div
@@ -50,17 +49,22 @@ const Sidebar = () => {
               handleClick={() => {
                 if (link.name === "disConnect") {
                   disConnect();
+                  localStorage.removeItem("user");
+                  setUser({});
                 } else if (!link.disabled) {
                   setIsActive(link.name);
                   navigate(link.link);
                 }
               }}
-              
             />
           ))}
         </div>
 
-        <Icon styles="bg-[#1c1c24]" imgUrl={sun} handleClick={()=> setActiveTheme((p)=> !p) } />
+        <Icon
+          styles="bg-[#1c1c24]"
+          imgUrl={sun}
+          handleClick={() => setActiveTheme((p) => !p)}
+        />
       </div>
     </div>
   );

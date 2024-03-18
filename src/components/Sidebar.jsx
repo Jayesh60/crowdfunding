@@ -50,7 +50,7 @@ const Sidebar = () => {
                 if (link.name === "disConnect") {
                   disConnect();
                   localStorage.removeItem("user");
-                  setUser({});
+                  setUser('')
                 } else if (!link.disabled) {
                   setIsActive(link.name);
                   navigate(link.link);

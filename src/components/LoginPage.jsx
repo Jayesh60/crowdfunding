@@ -33,7 +33,7 @@ const LoginPage = () => {
         const userDoc = docsnap.docs[0];
         const userData = userDoc.data();
         if (userData.password === data.password) {
-          localStorage.setItem("user", data);
+          localStorage.setItem("user", data.email);
           navigate("/");
           toast.success("LoggedIn Successfully!");
         } else {

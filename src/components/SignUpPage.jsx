@@ -43,7 +43,7 @@ const SignUpPage = () => {
           password: data.password,
           timestamp: serverTimestamp(),
         });
-        localStorage.setItem("user", data);
+        localStorage.setItem("user", data.email);
         setData({
           email: "",
           password: "",

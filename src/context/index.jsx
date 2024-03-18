@@ -108,7 +108,8 @@ export const StateContextProvider = ({ children }) => {
   return (
     <StateContext.Provider
       value={{
-        user, setUser,
+        user,
+        setUser,
         address,
         contract,
         connect,

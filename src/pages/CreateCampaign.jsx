@@ -89,7 +89,7 @@ const CreateCampaign = () => {
           <option  defaultChecked value="Social Cause">Social Cause</option>
           <option value="Education">Education</option>
           <option value="Business">Business</option>
-          <option value="Electronics">Gaming</option>
+          <option value="Gaming">Gaming</option>
         </select>
 
         <FormField

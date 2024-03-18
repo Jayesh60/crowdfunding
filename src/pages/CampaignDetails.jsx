@@ -87,6 +87,9 @@ const CampaignDetails = () => {
 
       <div className="mt-[60px] flex lg:flex-row flex-col gap-5">
         <div className="flex-[2] flex flex-col gap-[40px]">
+          <div className={`${activeTheme ?"text-green":"text-black"} font-epilogue font-[1000] text-3xl  uppercase`}>
+            {state.title}
+          </div>
           <div>
             <h4
               className={`${

@@ -18,7 +18,8 @@ const Home = () => {
   const fetchCampaigns = async () => {
     setIsLoading(true);
     const data = await getCampaigns();
-    console.log(data)
+    // console.log(data)
+    data.reverse();
     if (ActiveCategory !== "All") {
       const data2 = await data.filter(
         (item) => item.category === ActiveCategory

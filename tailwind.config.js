@@ -15,6 +15,9 @@ module.exports = {
       colors:{
         'light-gray' : "#1c1c24",
         green: "#4acd8d",
+      },
+      backgroundImage:{
+        'contact':"linear-gradient(93.3deg, #13ADB7 0.97%, #7EEDF4 100%);"
       }
     },
   },

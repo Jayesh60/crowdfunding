@@ -3,16 +3,17 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { db } from "../utils/firebase";
-import { StateContextProvider } from "../context";
+import { useStateContext } from "../context";
 import { logo } from "../assets";
 
-const LoginPage = () => {
+const LoginPage = ({ handleLogin }) => {
   const [data, setData] = useState({
     email: "",
     password: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const { user, setUser } = useStateContext();
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -34,8 +35,11 @@ const LoginPage = () => {
         const userData = userDoc.data();
         if (userData.password === data.password) {
           localStorage.setItem("user", data.email);
+          setUser({
+            email: data.email,
+          });
           navigate("/");
-          toast.success("LoggedIn Successfully!");
+          toast.success("Logged In Successfully!");
         } else {
           setData({ email: "", password: "" });
           setErrorMessage("password is incorrect...");
@@ -48,8 +52,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="inset-0 w-full bg-light-gray text-white flex items-center justify-center h-[100vh] absolute z-50">
-      <div className="h-fit bg-black md:w-[30%] w-[90%] flex flex-col p-6 px-8 items-center justify-center rounded-md">
+    <div className="inset-0 w-full bg-gray-800 bg-opacity-40 text-white flex items-center justify-center h-[100vh] absolute z-50">
+      <div className="h-fit relative bg-black md:w-[30%] w-[90%] flex flex-col p-6 px-8 items-center justify-center rounded-md">
         <img src={logo} alt="" className="h-24" />
         <form
           onSubmit={handleLoginSubmit}
@@ -89,14 +93,16 @@ const LoginPage = () => {
           <button className="w-fit bg-green text-black font-[500] px-8 py-2 rounded">
             Login
           </button>
-
-          <p className="text-green italic">
-            Not registered?{" "}
-            <Link to={"/signup"} className="underline">
-              Sign up
-            </Link>
-          </p>
         </form>
+        <div className="cursor-pointer p-1 " onClick={() => handleLogin(false)}>
+          <img
+            width="24"
+            height="24"
+            src="https://img.icons8.com/color/48/multiply.png"
+            alt="multiply"
+            className="absolute top-5 right-3"
+          />
+        </div>
       </div>
     </div>
   );

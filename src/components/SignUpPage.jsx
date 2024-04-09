@@ -14,7 +14,7 @@ import {
 import toast from "react-hot-toast";
 import { logo } from "../assets";
 
-const SignUpPage = () => {
+const SignUpPage = ({ handleReg }) => {
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -58,9 +58,9 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="inset-0 w-full bg-light-gray text-white flex items-center justify-center h-[100vh] absolute z-50">
-      <div className="h-fit bg-black md:w-[30%] w-[90%] flex flex-col p-6 px-8 items-center justify-center rounded-md">
-      <img src={logo} alt="" className="h-24" />
+    <div className="inset-0 fixed w-full bg-gray-800 bg-opacity-40 text-white flex items-center justify-center h-[100vh] z-50">
+      <div className="h-fit bg-black md:w-[30%] w-[90%] flex flex-col p-6 px-8 items-center justify-center rounded-md relative">
+        <img src={logo} alt="" className="h-24" />
         <form
           onSubmit={handleSignUp}
           className="pt-2 w-full flex flex-col gap-4"
@@ -99,13 +99,18 @@ const SignUpPage = () => {
           <button className="w-fit bg-green text-black font-[500] px-8 py-2 rounded">
             Create user
           </button>
-          <p className="text-green italic">
-            If already registered,{" "}
-            <Link to={"/login"} className="underline">
-              Log In
-            </Link>
-          </p>
         </form>
+        <div className="cursor-pointer p-1 " onClick={() => handleReg(false)}>
+          {/* <div className="h-[1px] w-4 bg-white absolute top-5 right-3 rotate-45"></div>
+          <div className="h-[1px] w-4 bg-white absolute top-5 right-3 -rotate-45"></div> */}
+          <img
+            width="24"
+            height="24"
+            src="https://img.icons8.com/color/48/multiply.png"
+            alt="multiply"
+            className="absolute top-5 right-3"
+          />
+        </div>
       </div>
     </div>
   );

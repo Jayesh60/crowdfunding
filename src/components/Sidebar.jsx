@@ -5,6 +5,7 @@ import { logo, sun } from "../assets";
 import { navlinks } from "../constants";
 import { useDisconnect } from "@thirdweb-dev/react";
 import { useStateContext } from "../context";
+import toast from "react-hot-toast";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -50,7 +51,8 @@ const Sidebar = () => {
                 if (link.name === "disConnect") {
                   disConnect();
                   localStorage.removeItem("user");
-                  setUser('')
+                  setUser({});
+                  toast.success("Logged Out Successfully!")
                 } else if (!link.disabled) {
                   setIsActive(link.name);
                   navigate(link.link);

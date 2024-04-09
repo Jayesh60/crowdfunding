@@ -61,7 +61,7 @@ const Home = () => {
 
   return (
     <div>
-      <div className="lg:flex-1 flex flex-row md:w-[458px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-3xl md:absolute md:top-5 mb-5">
+      <div className="lg:flex-1 flex flex-row md:w-[458px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-3xl md:absolute md:top-2 mb-5">
         <input
           type="text"
           placeholder="Search for campaigns"

@@ -11,7 +11,9 @@ import toast from "react-hot-toast";
 
 const CampaignDetails = () => {
   const { state } = useLocation();
+  
   const navigate = useNavigate();
+
   const {
     donate,
     getDonations,
@@ -24,6 +26,7 @@ const CampaignDetails = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [amount, setAmount] = useState("");
   const [donators, setDonators] = useState([]);
+  const [confirm, setConfirm] = useState(false);
 
   const remainingDays = daysLeft(state.deadline);
 
@@ -38,6 +41,7 @@ const CampaignDetails = () => {
   }, [contract, address]);
 
   const handleDonate = async () => {
+
     setIsLoading(true);
     try {
       await donate(state.pId, amount);

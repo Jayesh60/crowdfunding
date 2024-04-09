@@ -23,7 +23,7 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
 
   
   return (
-    <div>
+    <div className="min-h-screen">
       <h1 className= {`${activeTheme? "text-white" : "text-black"} font-epilogue font-semibold py-2  `}>
         {title} ({dataList.length})
       </h1>

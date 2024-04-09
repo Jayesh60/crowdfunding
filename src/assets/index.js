@@ -16,10 +16,14 @@ import facebook from "./facebook.svg";
 import linkedin from "./linkedin.svg";
 import x from "./x.svg";
 import whatsapp from "./whatsapp.svg";
+import homeBanner from "./home-banner.png";
+import mission from "./mission.png";
+import hands from "./hands.png";
 
 export {
-  x,
+  x,mission,hands,
   linkedin,
+  homeBanner,
   whatsapp,
   tagType,
   createCampaign,

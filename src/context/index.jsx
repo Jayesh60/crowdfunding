@@ -15,7 +15,7 @@ const StateContext = createContext();
 export const StateContextProvider = ({ children }) => {
   // category updated
   const { contract } = useContract(
-    "0xf5dFfcc558d05211fb46A701183e8aF241AD07f8"
+    "0xC26bD576944F5E29a85cCED450732Df5bd39764a"
   );
   const { mutateAsync: createCampaign } = useContractWrite(
     contract,
@@ -51,7 +51,7 @@ export const StateContextProvider = ({ children }) => {
 
   const getCampaigns = async () => {
     const campaigns = await contract.call("getCampaigns");
-    
+
     const parsedCampaings = campaigns.map((campaign, i) => ({
       owner: campaign.owner,
       title: campaign.title,

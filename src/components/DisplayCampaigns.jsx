@@ -6,8 +6,8 @@ import { loader } from "../assets";
 import { daysLeft } from "../utils";
 import { useStateContext } from "../context";
 
-const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
-  const {activeTheme, setActiveTheme} = useStateContext();
+const DisplayCampaigns = ({ title, isLoading, campaigns, profile }) => {
+  const { activeTheme, setActiveTheme } = useStateContext();
   const navigate = useNavigate();
 
   const handleNavigate = (campaign) => {
@@ -21,10 +21,13 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
 
   // console.log('dataFeed', dataList)
 
-  
   return (
     <div className="min-h-screen">
-      <h1 className= {`${activeTheme? "text-white" : "text-black"} font-epilogue font-semibold py-2  `}>
+      <h1
+        className={`${
+          activeTheme ? "text-white" : "text-black"
+        } font-epilogue font-semibold py-2  `}
+      >
         {title} ({dataList.length})
       </h1>
 
@@ -43,9 +46,17 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
           </p>
         )}
 
-        {!isLoading &&
+        {!isLoading && !profile &&
           dataList.length > 0 &&
           dataList.map((campaign) => (
+            <FundCard
+              key={uuidv4()}
+              {...campaign}
+              handleClick={() => handleNavigate(campaign)}
+            />
+          ))}
+        {!isLoading && profile &&
+          campaigns.map((campaign) => (
             <FundCard
               key={uuidv4()}
               {...campaign}

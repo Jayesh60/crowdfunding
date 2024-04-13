@@ -12,6 +12,7 @@ const CreateCampaign = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const { createCampaign } = useStateContext();
+  const [imgCount, setImgCount] = useState(0);
   const [form, setForm] = useState({
     name: "",
     title: "",
@@ -19,29 +20,51 @@ const CreateCampaign = () => {
     description: "",
     target: "",
     deadline: "",
-    image: "",
   });
+
+  const [imgList, setImgList] = useState([""]);
 
   const handleFormFieldChange = (fieldName, e) => {
     setForm({ ...form, [fieldName]: e.target.value });
   };
 
+  const handleImg = (e, index, indexToRemove) => {
+  const value = e?.target.value;
+  if (index === undefined) {
+    setImgList((prevImgList) => [...prevImgList, value]);
+  } else {
+    setImgList((prevImgList) => {
+      const newImgList = [...prevImgList];
+      if (indexToRemove!== undefined) {
+        newImgList.splice(indexToRemove, 1);
+        setImgCount((p) => p - 1);
+      } else {
+        newImgList[index] = value;
+      }
+      return newImgList;
+    });
+  }
+};
+
+  // console.log(imgList);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log("form",form);
-    checkIfImage(form.image, async (exists) => {
+    checkIfImage(imgList, async (exists) => {
       if (exists) {
         setIsLoading(true);
         await createCampaign({
           ...form,
+          image: imgList,
           target: ethers.utils.parseUnits(form.target, 18),
         });
         setIsLoading(false);
         navigate("/");
-        toast.success('Campaign Created!')
+        toast.success("Campaign Created!");
       } else {
         // alert("Provide valid image URL");
-        toast.error("Not an Image")
+        toast.error("Not an Image");
         setForm({ ...form, image: "" });
       }
     });
@@ -49,7 +72,6 @@ const CreateCampaign = () => {
 
   return (
     <div className="bg-[#1c1c24] flex justify-center items-center flex-col rounded-[10px] sm:p-10 p-4">
-      
       <div className="flex justify-center items-center p-[16px] sm:min-w-[380px] bg-[#3a3a43] rounded-[10px]">
         <h1 className="font-epilogue font-bold sm:text-[25px] text-[18px] leading-[38px] text-white">
           Start a Campaign
@@ -77,7 +99,9 @@ const CreateCampaign = () => {
           />
         </div>
 
-      <label htmlFor="category" className="text-green">Category *</label>
+        <label htmlFor="category" className="text-green">
+          Category *
+        </label>
         <select
           placeholder="Category"
           id="category"
@@ -86,7 +110,9 @@ const CreateCampaign = () => {
           className="bg-transparent cursor-pointer font-epilogue text-green text-[14px] rounded-[10px] sm:min-w-[300px] py-[15px] sm:px-[25px] px-[15px] outline-none border-[1px] border-[#3a3a43] "
           required
         >
-          <option  defaultChecked value="Social Cause">Social Cause</option>
+          <option defaultChecked value="Social Cause">
+            Social Cause
+          </option>
           <option value="Education">Education</option>
           <option value="Business">Business</option>
           <option value="Gaming">Gaming</option>
@@ -128,18 +154,65 @@ const CreateCampaign = () => {
           />
         </div>
 
-        <FormField
-          labelName="Campaign image *"
-          placeholder="Place image URL of your campaign"
-          inputType="url"
-          value={form.image}
-          handleChange={(e) => handleFormFieldChange("image", e)}
-        />
+        <div className="flex flex-col gap-2">
+          <div className="flex justify-between">
+            <label className="w-full">
+              <span className="font-epilogue font-medium text-[14px] leading-[22px] text-[#FFFFFF] mb-[10px]">
+                Image*
+              </span>
+            </label>
+
+            <div
+              className="flex-none text-white cursor-pointer bg-gray-600 opacity-90 px-2 py-1 rounded-sm bg-opacity-90 text-sm"
+              onClick={() => {
+                setImgCount((p) => p + 1);
+                setImgList((prevImgList) => [...prevImgList, ""]);
+              }}
+            >
+              Add Another Image+
+            </div>
+          </div>
+
+          <input
+            required
+            // value={value}
+            onChange={(e) => handleImg(e, 0)}
+            step="0.1"
+            placeholder={"Paste image URL of your campaign"}
+            className="py-[15px] sm:px-[25px] px-[15px] outline-none border-[1px] border-[#3a3a43] bg-transparent font-epilogue text-white text-[14px] placeholder:text-[#4b5264] rounded-[10px] sm:min-w-[300px]"
+          />
+
+          {[...Array(imgCount)].map((i, index) => (
+            <div className="flex relative w-full items-center" key={index}>
+              <input
+                required
+                value={imgList[index+1]}
+                onChange={(e) => handleImg(e, index+1)}
+                step="0.1"
+                placeholder={"Paste image URL of your campaign"}
+                className="py-[15px] sm:px-[25px] px-[15px] outline-none border-[1px] border-[#3a3a43] bg-transparent font-epilogue text-white text-[14px] placeholder:text-[#4b5264] rounded-[10px] sm:min-w-[300px] w-full"
+              />
+              <span
+                className="absolute right-5 rotate-90 cursor-pointer text-red-600"
+                onClick={() => {
+                  handleImg(null, null, index+1);
+                }}
+              >
+                <img
+                  width="24"
+                  height="24"
+                  src="https://img.icons8.com/ios-filled/50/FA5252/multiply.png"
+                  alt="multiply"
+                />
+              </span>
+            </div>
+          ))}
+        </div>
 
         <div className="flex justify-center items-center mt-[40px]">
           <CustomButton
             btnType="submit"
-            title={isLoading? "Submitting...":"Submit new campaign"}
+            title={isLoading ? "Submitting..." : "Submit new campaign"}
             styles="bg-[#1dc071]"
           />
         </div>

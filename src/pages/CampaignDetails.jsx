@@ -2,6 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ethers } from "ethers";
 
+import { Navigation } from "swiper/modules";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+
 import { useStateContext } from "../context";
 import { CountBox, CustomButton, Loader } from "../components";
 import { calculateBarPercentage, daysLeft } from "../utils";
@@ -83,11 +91,28 @@ const CampaignDetails = () => {
 
       <div className="w-full flex md:flex-row flex-col mt-10 gap-[30px]">
         <div className="flex-1 flex-col">
-          <img
-            src={state.image}
-            alt="campaign"
-            className="w-full h-[410px] object-cover rounded-xl"
-          />
+          <div className="flex md:w-[70vw] ">
+            <Swiper
+              modules={[Navigation]}
+              spaceBetween={50}
+              slidesPerView={1}
+              navigation
+              centeredSlides
+              // onSwiper={(swiper) => console.log(swiper)}
+            >
+              {state?.image?.map((item, index) => (
+                <SwiperSlide key={index} className="w-full">
+                  <img
+                    src={item}
+                    key={index}
+                    alt="campaign"
+                    className="w-full h-[410px] object-cover rounded"
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+
           <div className="relative w-full h-[5px] bg-[#3a3a43] mt-2">
             <div
               className="absolute h-full bg-[#4acd8d]"
@@ -240,9 +265,11 @@ const CampaignDetails = () => {
               </div>
 
               <button
-                className={`font-epilogue font-semibold text-[16px] leading-[26px] text-white min-h-[52px] px-4 rounded-[10px] w-full bg-[#8c6dfd] ${ amount<=0  && 'cursor-not-allowed' }`}
+                className={`font-epilogue font-semibold text-[16px] leading-[26px] text-white min-h-[52px] px-4 rounded-[10px] w-full bg-[#8c6dfd] ${
+                  amount <= 0 && "cursor-not-allowed"
+                }`}
                 onClick={() => {
-                  if(amount> 0) setConfirm(true);
+                  if (amount > 0) setConfirm(true);
                 }}
               >
                 Fund Campaign

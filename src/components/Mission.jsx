@@ -6,10 +6,10 @@ const Mission = () => {
       <div className="md:w-1/2 max-md:h-1/2 flex flex-col justify-center gap-10 ">
         <div>
           <h4 className="text-xs text-light-gray">HUMANITARIAN MISSION</h4>
-          <h1 className="text-3xl font-bold">
+          <h1 className="text-5xl font-bold">
             Help the Affected by <br />
             <span className="text-green"> Disasters</span>,{" "}
-            <span className="text-green"> Shortages</span>, and <br />
+            <span className="text-green"> Shortages</span>, and 
             <span className="text-green"> Emergency Relief</span>.
           </h1>
         </div>

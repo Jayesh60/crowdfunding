@@ -3,7 +3,7 @@ import { logo } from "../assets";
 
 const Hero = ({ user, handleLogin, handleReg }) => {
 
-
+  // console.log(user)
   return (
     <div className="md:px-16 px-6 relative w-full bg-no-repeat bg-center bg-[url('/src/assets/home-banner.png')] bg-cover">
       <nav className="flex justify-between py-5 z-10 w-full h-full ">

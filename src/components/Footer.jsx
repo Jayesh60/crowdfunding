@@ -5,13 +5,13 @@ export function Footer() {
     <div className="w-full absolute bottom-0 z-0 flex flex-col justify-between bg-gray-700">
       <div></div>
       <footer className="text-gray-600 body-font ">
-        <div className="container px-32 py-2 mx-auto flex items-center sm:flex-row flex-col">
+        <div className="md:px-32 py-2 mx-auto flex items-center md:flex-wrap max-md:flex-col">
           <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
             <img src={logo} alt="" />
-            <span className="ml-3 text-white text-xl">Crowdfunding</span>
+            <span className="ml-3 text-white text-xl">FundDive</span>
           </a>
-          <p className="text-sm text-gray-200 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-300 sm:py-2 sm:mt-0 mt-4">
-            © 2024 Crowdfunding — UMIT batch24
+          <p className="text-sm text-gray-200 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-600 sm:py-2 sm:mt-0 mt-4">
+            © 2024 FundDive — UMIT batch24
             <a
               href="https://twitter.com/knyttneve"
               className="text-gray-600 ml-1"

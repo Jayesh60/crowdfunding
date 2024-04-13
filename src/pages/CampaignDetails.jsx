@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 
 const CampaignDetails = () => {
   const { state } = useLocation();
-  
+
   const navigate = useNavigate();
 
   const {
@@ -24,9 +24,12 @@ const CampaignDetails = () => {
   } = useStateContext();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState(0);
   const [donators, setDonators] = useState([]);
+
   const [confirm, setConfirm] = useState(false);
+  const [proceedTrns, setProceedTrns] = useState(false);
+  const [dontateCmpt, setDontateCmpt] = useState(false);
 
   const remainingDays = daysLeft(state.deadline);
 
@@ -40,8 +43,9 @@ const CampaignDetails = () => {
     if (contract) fetchDonators();
   }, [contract, address]);
 
-  const handleDonate = async () => {
+  const validateDonate = () => {};
 
+  const handleDonate = async () => {
     setIsLoading(true);
     try {
       await donate(state.pId, amount);
@@ -55,8 +59,27 @@ const CampaignDetails = () => {
   };
 
   return (
-    <div>
+    <div
+      onClick={() => {
+        if (confirm) setConfirm(false);
+      }}
+    >
       {isLoading && <Loader />}
+      {confirm && (
+        <div className="fixed inset-0 z-10 h-screen bg-[rgba(0,0,0,0.7)] flex items-center justify-center flex-col ">
+          <div className="h-fit relative bg-[#8c6dfd] bg-opacity-80 md:w-[25%] w-[90%] flex flex-col p-3 px-8 items-center justify-center rounded-sm gap-2">
+            <h1 className="text-lg font-semibold text-white text-center">
+              Are you sure?
+            </h1>
+            <button
+              onClick={handleDonate}
+              className="w-fit justify-end bg-gray-800 font-medium text-white px-4 py-1 rounded-sm"
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+      )}
 
       <div className="w-full flex md:flex-row flex-col mt-10 gap-[30px]">
         <div className="flex-1 flex-col">
@@ -91,7 +114,11 @@ const CampaignDetails = () => {
 
       <div className="mt-[60px] flex lg:flex-row flex-col gap-5">
         <div className="flex-[2] flex flex-col gap-[40px]">
-          <div className={`${activeTheme ?"text-green":"text-black"} font-epilogue font-[1000] text-3xl  uppercase`}>
+          <div
+            className={`${
+              activeTheme ? "text-green" : "text-black"
+            } font-epilogue font-[1000] text-3xl  uppercase`}
+          >
             {state.title}
           </div>
           <div>
@@ -212,12 +239,14 @@ const CampaignDetails = () => {
                 </p>
               </div>
 
-              <CustomButton
-                btnType="button"
-                title="Fund Campaign"
-                styles="w-full bg-[#8c6dfd]"
-                handleClick={handleDonate}
-              />
+              <button
+                className={`font-epilogue font-semibold text-[16px] leading-[26px] text-white min-h-[52px] px-4 rounded-[10px] w-full bg-[#8c6dfd] ${ amount<=0  && 'cursor-not-allowed' }`}
+                onClick={() => {
+                  if(amount> 0) setConfirm(true);
+                }}
+              >
+                Fund Campaign
+              </button>
             </div>
           </div>
         </div>

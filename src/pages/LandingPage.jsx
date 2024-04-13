@@ -8,14 +8,15 @@ import SignUpPage from "../components/SignUpPage";
 
 const LandingPage = () => {
   const { user } = useStateContext();
-  let loggedInUser = "";
+  const [loggedInUser, setLoggedInUser] = useState('');
 
   const [loginToggle, setLoginToggle] = useState(false);
   const [regToggle, setRegToggle] = useState(false);
 
   useEffect(() => {
     const Sessionuser = localStorage.getItem("user");
-    if (Sessionuser) loggedInUser = Sessionuser;
+    if (Sessionuser) setLoggedInUser(Sessionuser);
+    // console.log(loggedInUser);
   }, [user]);
 
   return (
@@ -23,7 +24,7 @@ const LandingPage = () => {
       {loginToggle && <LoginPage handleLogin={setLoginToggle} />}
       {regToggle && <SignUpPage handleReg={setRegToggle} />}
       <Hero
-        user={loggedInUser}
+        user={loggedInUser && loggedInUser}
         handleLogin={setLoginToggle}
         handleReg={setRegToggle}
       />

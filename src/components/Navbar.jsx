@@ -13,7 +13,7 @@ const Navbar = () => {
   const { connect, address, setActiveTheme, activeTheme } = useStateContext();
 
   return (
-    <div className="flex md:flex-row w-full flex-col-reverse justify-end mb-[35px] gap-6">
+    <div className="flex md:hidden w-full flex-col-reverse justify-end mb-[35px] gap-6">
       <div className="sm:flex hidden flex-row justify-end gap-4 ">
         <CustomButton
           btnType="button"
@@ -37,7 +37,7 @@ const Navbar = () => {
       </div>
 
       {/* Small screen navigation */}
-      <div className="sm:hidden flex justify-between items-center ">
+      <div className="sm:hidden flex w-full justify-between items-center ">
         <Link
           to={"/"}
           className="w-[40px] h-[40px] rounded-[10px] bg-[#2c2f32] flex justify-center items-center cursor-pointer"

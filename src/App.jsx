@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-
-//import { Sidebar, Navbar } from './components'
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 import { CampaignDetails, CreateCampaign, Home, Profile } from "./pages";
@@ -47,22 +45,14 @@ const App = () => {
     <div
       className={`relative ${
         activeTheme ? "bg-black" : "bg-[#CFE2F3]"
-      } min-h-screen flex flex-row  transition duration-500 select-none overflow-hidden`}
+      } min-h-screen flex !flex-col h-full w-full transition duration-500 select-none overflow-hidden gap-5`}
     >
-      {path.pathname !== "/about" && (
-        <>
-          <div className="sm:flex px-6 pt-2 z-20 hidden fixed mr-10 ">
-            <Sidebar />
-          </div>
-
-          <div className="w-[10%] md:flex max-md:hidden"></div>
-        </>
-      )}
+      {path.pathname !== "/about" && <Sidebar />}
 
       <div
-        className={`flex-1 ${
-          path.pathname !== "/about" ? "px-6 pt-2 max-w-[1280px] mx-auto pb-32": "w-full"
-        }  max-sm:w-full `}
+        className={`flex flex-col ${
+          path.pathname !== "/about" ? "" : "w-full"
+        }  max-sm:w-full items-center justify-center`}
       >
         {path.pathname !== "/about" && <Navbar />}
 
@@ -76,8 +66,8 @@ const App = () => {
           <Route path="/campaign-details/:id" element={<CampaignDetails />} />
         </Routes>
       </div>
-      <Footer />
 
+      <Footer />
       <Toaster />
     </div>
   );

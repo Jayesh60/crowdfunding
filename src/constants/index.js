@@ -35,3 +35,16 @@ export const navlinks = [
     disabled: true,
   },
 ];
+
+export const categories = [
+  { value: "All", label: "All" },
+  { value: "Education", label: "Education" },
+  { value: "Art", label: "Art" },
+  { value: "Social Cause", label: "Social Cause" },
+  { value: "Design", label: "Design" },
+  { value: "Technology", label: "Technology" },
+  { value: "Fashion", label: "Fashion" },
+  { value: "Photography", label: "Photography" },
+  { value: "Games", label: "Games" },
+  { value: "Music", label: "Music" },
+];

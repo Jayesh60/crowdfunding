@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { DisplayCampaigns } from "../components";
 import { useStateContext } from "../context";
 import { search } from "../assets";
+import { categories } from "../constants";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +38,8 @@ const Home = () => {
       (item) =>
         regex.test(item.description) ||
         regex.test(item.name) ||
-        regex.test(item.title)
+        regex.test(item.title) ||
+        regex.test(item.category)
     );
   };
 
@@ -57,20 +59,23 @@ const Home = () => {
     if (contract) fetchCampaigns();
   }, [address, contract, ActiveCategory]);
 
-  const categories = ["All", "Education", "Business", "Social Cause", "Gaming"];
 
   return (
-    <div>
-      <div className="lg:flex-1 flex flex-row md:w-[458px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-3xl md:absolute md:top-2 mb-5">
+    <div className="md:px-16 w-full">
+      <div className="flex flex-row md:w-[458px] py-3 shadow-search-bar items-center pl-2 border-gray-500 border border-opacity-90 rounded-md mb-5">
         <input
           type="text"
-          placeholder="Search for campaigns"
-          className="flex w-full font-epilogue font-normal text-[#e8e4e4] placeholder:text-[#FFFFFF80]  bg-transparent outline-none px-2"
+          placeholder="Search campaigns, creators, and categories"
+          className={`flex w-full font-epilogue font-normal placeholder:text-sm bg-transparent outline-none px-2 ${
+            activeTheme
+              ? "text-green placeholder:text-[#4acd8ef1]"
+              : "text-black placeholder:text-black"
+          }`}
           value={searchText}
           onChange={handleSearchChange}
         />
 
-        <div className="w-[72px] h-full rounded-[20px] bg-[#4acd8d] flex justify-center items-center cursor-pointer">
+        <div className="w-[72px] h-full flex justify-center items-center cursor-pointer">
           <img
             src={search}
             alt="search"
@@ -79,23 +84,24 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 w-full">
         {/* <h1>Categories</h1> */}
-        <div className="flex md:gap-2 items-center max-md:justify-center">
+      <div className="flex md:gap-3 pb-2 items-center max-md:justify-center font-semibold">
           {categories.map((item, index) => (
             <p
               key={index}
-              onClick={() => setActiveCategory(item)}
+              onClick={() => setActiveCategory(item.value)}
               className={`${
-                ActiveCategory === item ? activeTheme
-                    ? "bg-light-gray text-green font-semibold"
-                    : " bg-black text-green font-semibold"
-                : activeTheme
-                  ? " text-green"
-                  : " text-black"
-              } md:px-6 px-3 py-1.5 rounded-md max-md:text-xs  md:py-1.5 cursor-pointer transition duration-300`}
+                ActiveCategory === item?.value
+                  ? activeTheme
+                    ? " text-green font-semibold border-b border-green"
+                    : "  text-black font-semibold border-b border-black"
+                  : activeTheme
+                  ? " text-green hover:border-b hover:border-green"
+                  : " text-black hover:border-b hover:border-black"
+              }  max-md:text-xs pb-1 ${activeTheme ? 'border-b border-black': 'border-b'}  cursor-pointer transition duration-300`}
             >
-              {item}
+              {item?.value}
             </p>
           ))}
         </div>

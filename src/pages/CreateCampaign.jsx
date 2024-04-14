@@ -7,16 +7,19 @@ import { money } from "../assets";
 import { CustomButton, FormField } from "../components";
 import { checkIfImage } from "../utils";
 import toast from "react-hot-toast";
+import { categories } from "../constants";
+import Select from "react-select";
+import makeAnimated from 'react-select/animated';
 
 const CreateCampaign = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [ActiveCategory, setActiveCategory] = useState(false);
   const { createCampaign } = useStateContext();
   const [imgCount, setImgCount] = useState(0);
   const [form, setForm] = useState({
     name: "",
     title: "",
-    category: "Social Cause",
     description: "",
     target: "",
     deadline: "",
@@ -29,22 +32,22 @@ const CreateCampaign = () => {
   };
 
   const handleImg = (e, index, indexToRemove) => {
-  const value = e?.target.value;
-  if (index === undefined) {
-    setImgList((prevImgList) => [...prevImgList, value]);
-  } else {
-    setImgList((prevImgList) => {
-      const newImgList = [...prevImgList];
-      if (indexToRemove!== undefined) {
-        newImgList.splice(indexToRemove, 1);
-        setImgCount((p) => p - 1);
-      } else {
-        newImgList[index] = value;
-      }
-      return newImgList;
-    });
-  }
-};
+    const value = e?.target.value;
+    if (index === undefined) {
+      setImgList((prevImgList) => [...prevImgList, value]);
+    } else {
+      setImgList((prevImgList) => {
+        const newImgList = [...prevImgList];
+        if (indexToRemove !== undefined) {
+          newImgList.splice(indexToRemove, 1);
+          setImgCount((p) => p - 1);
+        } else {
+          newImgList[index] = value;
+        }
+        return newImgList;
+      });
+    }
+  };
 
   // console.log(imgList);
 
@@ -57,6 +60,7 @@ const CreateCampaign = () => {
         await createCampaign({
           ...form,
           image: imgList,
+          category: ActiveCategory,
           target: ethers.utils.parseUnits(form.target, 18),
         });
         setIsLoading(false);
@@ -69,7 +73,7 @@ const CreateCampaign = () => {
       }
     });
   };
-
+  const animatedComponents = makeAnimated();
   return (
     <div className="bg-[#1c1c24] flex justify-center items-center flex-col rounded-[10px] sm:p-10 p-4">
       <div className="flex justify-center items-center p-[16px] sm:min-w-[380px] bg-[#3a3a43] rounded-[10px]">
@@ -102,21 +106,14 @@ const CreateCampaign = () => {
         <label htmlFor="category" className="text-green">
           Category *
         </label>
-        <select
-          placeholder="Category"
-          id="category"
-          value={form.category}
-          onChange={(e) => handleFormFieldChange("category", e)}
-          className="bg-transparent cursor-pointer font-epilogue text-green text-[14px] rounded-[10px] sm:min-w-[300px] py-[15px] sm:px-[25px] px-[15px] outline-none border-[1px] border-[#3a3a43] "
-          required
-        >
-          <option defaultChecked value="Social Cause">
-            Social Cause
-          </option>
-          <option value="Education">Education</option>
-          <option value="Business">Business</option>
-          <option value="Gaming">Gaming</option>
-        </select>
+        <Select
+          defaultValue={categories[1]}
+          components={animatedComponents}
+          options={categories.slice(1)}
+          onChange={setActiveCategory}
+          className="basic-single"
+          classNamePrefix="select"
+        />
 
         <FormField
           labelName="Story *"
@@ -186,8 +183,8 @@ const CreateCampaign = () => {
             <div className="flex relative w-full items-center" key={index}>
               <input
                 required
-                value={imgList[index+1]}
-                onChange={(e) => handleImg(e, index+1)}
+                value={imgList[index + 1]}
+                onChange={(e) => handleImg(e, index + 1)}
                 step="0.1"
                 placeholder={"Paste image URL of your campaign"}
                 className="py-[15px] sm:px-[25px] px-[15px] outline-none border-[1px] border-[#3a3a43] bg-transparent font-epilogue text-white text-[14px] placeholder:text-[#4b5264] rounded-[10px] sm:min-w-[300px] w-full"
@@ -195,7 +192,7 @@ const CreateCampaign = () => {
               <span
                 className="absolute right-5 rotate-90 cursor-pointer text-red-600"
                 onClick={() => {
-                  handleImg(null, null, index+1);
+                  handleImg(null, null, index + 1);
                 }}
               >
                 <img

@@ -36,7 +36,6 @@ const CampaignDetails = () => {
   const [donators, setDonators] = useState([]);
 
   const [confirm, setConfirm] = useState(false);
-  const [proceedTrns, setProceedTrns] = useState(false);
   const [dontateCmpt, setDontateCmpt] = useState(false);
 
   const remainingDays = daysLeft(state.deadline);
@@ -57,8 +56,8 @@ const CampaignDetails = () => {
     setIsLoading(true);
     try {
       await donate(state.pId, amount);
+      setDontateCmpt(true);
       toast.success("Donated Successfully!");
-      navigate("/");
       setIsLoading(false);
     } catch (err) {
       setIsLoading(false);
@@ -66,19 +65,53 @@ const CampaignDetails = () => {
     }
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDontateCmpt(false);
+    }, 2000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [dontateCmpt]);
+
   return (
     <div
       onClick={() => {
-        if (confirm) setConfirm(false);
+        if (confirm) {
+          setConfirm(false);
+        }
       }}
+      className="flex items-center flex-col w-full px-10"
     >
+      {dontateCmpt && (
+        <div className="fixed inset-0 z-10 h-screen bg-[rgba(0,0,0,0.7)] flex items-center justify-center flex-col ">
+          <div className="relative bg-green bg-opacity-90 md:w-[25%] w-[90%] flex flex-col p-3 px-8 items-center justify-center rounded-sm gap-2 py-4">
+            <img
+              width="150"
+              height="150"
+              src="https://img.icons8.com/clouds/150/checked--v1.png"
+              alt="checked--v1"
+            />
+            <h1 className="text-2xl font-bold text-black text-center font-epilogue">
+              Thank you for supporting the cause!
+            </h1>
+          </div>
+        </div>
+      )}
       {isLoading && <Loader />}
       {confirm && (
         <div className="fixed inset-0 z-10 h-screen bg-[rgba(0,0,0,0.7)] flex items-center justify-center flex-col ">
           <div className="h-fit relative bg-[#8c6dfd] bg-opacity-80 md:w-[25%] w-[90%] flex flex-col p-3 px-8 items-center justify-center rounded-sm gap-2">
-            <h1 className="text-lg font-semibold text-white text-center">
+            <div className="text-lg flex items-center gap-2 font-semibold text-white text-center">
+              <img
+                width="100"
+                height="100"
+                src="https://img.icons8.com/clouds/100/error.png"
+                alt="error"
+              />
               Are you sure?
-            </h1>
+            </div>
             <button
               onClick={handleDonate}
               className="w-fit justify-end bg-gray-800 font-medium text-white px-4 py-1 rounded-sm"
@@ -88,8 +121,7 @@ const CampaignDetails = () => {
           </div>
         </div>
       )}
-
-      <div className="w-full flex md:flex-row flex-col mt-10 gap-[30px]">
+      <div className="w-full flex md:flex-row flex-col gap-[30px]">
         <div className="flex-1 flex-col">
           <div className="flex md:w-[70vw] ">
             <Swiper
@@ -101,12 +133,12 @@ const CampaignDetails = () => {
               // onSwiper={(swiper) => console.log(swiper)}
             >
               {state?.image?.map((item, index) => (
-                <SwiperSlide key={index} className="w-full">
+                <SwiperSlide key={index} className="w-full h-full">
                   <img
                     src={item}
                     key={index}
                     alt="campaign"
-                    className="w-full h-[410px] object-cover rounded"
+                    className="w-full h-full aspect-video object-cover rounded"
                   />
                 </SwiperSlide>
               ))}
@@ -136,7 +168,6 @@ const CampaignDetails = () => {
           <CountBox title="Total Backers" value={donators.length} />
         </div>
       </div>
-
       <div className="mt-[60px] flex lg:flex-row flex-col gap-5">
         <div className="flex-[2] flex flex-col gap-[40px]">
           <div

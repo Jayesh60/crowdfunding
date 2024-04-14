@@ -17,7 +17,11 @@ module.exports = {
         green: "#4acd8d",
       },
       backgroundImage:{
-        'contact':"linear-gradient(93.3deg, #13ADB7 0.97%, #7EEDF4 100%);"
+        'contact':"linear-gradient(93.3deg, #13ADB7 0.97%, #7EEDF4 100%);",
+        'footer' : "url('/src/assets/bg-doodle.png')"
+      },
+      boxShadowColor:{
+        "search-bar" : "0px 6px 16px 0px rgba(0,0,0,0.12)"
       }
     },
   },

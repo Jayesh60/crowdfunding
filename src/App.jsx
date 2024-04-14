@@ -52,7 +52,7 @@ const App = () => {
       <div
         className={`flex flex-col ${
           path.pathname !== "/about" ? "" : "w-full"
-        }  max-sm:w-full items-center justify-center`}
+        }  max-sm:w-full items-center justify-center px-6`}
       >
         {path.pathname !== "/about" && <Navbar />}
 

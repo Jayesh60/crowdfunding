@@ -85,7 +85,7 @@ const Home = () => {
 
       <div className="flex flex-col gap-2 w-full pb-4 border-b border-gray-600 mb-5">
         {/* <h1>Categories</h1> */}
-        <div className="flex md:gap-4 items-center max-md:justify-center font-semibold">
+        <div className="flex flex-wrap md:gap-4 gap-2 items-center max-md:justify-center font-semibold">
           {categories.map((item, index) => (
             <p
               key={index}

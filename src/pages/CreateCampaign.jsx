@@ -14,7 +14,7 @@ import makeAnimated from 'react-select/animated';
 const CreateCampaign = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const [ActiveCategory, setActiveCategory] = useState(false);
+  const [ActiveCategory, setActiveCategory] = useState(categories[1]);
   const { createCampaign } = useStateContext();
   const [imgCount, setImgCount] = useState(0);
   const [form, setForm] = useState({
@@ -49,7 +49,7 @@ const CreateCampaign = () => {
     }
   };
 
-  // console.log(imgList);
+  console.log(ActiveCategory?.value);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,7 +60,7 @@ const CreateCampaign = () => {
         await createCampaign({
           ...form,
           image: imgList,
-          category: ActiveCategory,
+          category: ActiveCategory?.value,
           target: ethers.utils.parseUnits(form.target, 18),
         });
         setIsLoading(false);

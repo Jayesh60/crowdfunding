@@ -59,7 +59,7 @@ const SignUpPage = ({ handleReg }) => {
 
   return (
     <div className="inset-0 fixed w-full bg-gray-800 bg-opacity-40 text-white flex items-center justify-center h-[100vh] z-50">
-      <div className="h-fit bg-black md:w-[30%] w-[90%] flex flex-col p-6 px-8 items-center justify-center rounded-md relative">
+      <div className="h-fit bg-black md:w-[30%] w-[80%] flex flex-col p-6 px-8 items-center justify-center rounded-md relative">
         <img src={logo} alt="" className="h-24" />
         <form
           onSubmit={handleSignUp}

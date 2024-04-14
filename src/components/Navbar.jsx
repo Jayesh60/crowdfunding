@@ -5,12 +5,15 @@ import { useStateContext } from "../context";
 import { CustomButton } from "./";
 import { logo, menu, search, thirdweb, sun } from "../assets";
 import { navlinks } from "../constants";
+import { useDisconnect } from "@thirdweb-dev/react";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState("dashboard");
   const [toggleDrawer, setToggleDrawer] = useState(false);
   const { connect, address, setActiveTheme, activeTheme } = useStateContext();
+  const {user, setUser } = useStateContext();
+  const disConnect = useDisconnect();
 
   return (
     <div className="flex md:hidden w-full flex-col-reverse justify-end mb-[35px] gap-6">
@@ -58,7 +61,11 @@ const Navbar = () => {
             }}
           >
             {activeTheme ? (
-              <img src="https://img.icons8.com/ios/50/ffffff/brightness-settings.png" alt="brightness-settings" className={`w-[24px] h-[26px] object-contain`}/>
+              <img
+                src="https://img.icons8.com/ios/50/ffffff/brightness-settings.png"
+                alt="brightness-settings"
+                className={`w-[24px] h-[26px] object-contain`}
+              />
             ) : (
               <img
                 src="https://img.icons8.com/ios-glyphs/30/moon-symbol.png"
@@ -86,9 +93,16 @@ const Navbar = () => {
                   isActive === link.name && "bg-[#3a3a43]"
                 }`}
                 onClick={() => {
-                  setIsActive(link.name);
-                  setToggleDrawer(false);
-                  navigate(link.link);
+                  if (link.name === "disConnect") {
+                    disConnect();
+                    localStorage.removeItem("user");
+                    setUser({});
+                    toast.success("Logged Out Successfully!");
+                  } else {
+                    setIsActive(link.name);
+                    setToggleDrawer(false);
+                    navigate(link.link);
+                  }
                 }}
               >
                 <img

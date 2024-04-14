@@ -53,7 +53,7 @@ const LoginPage = ({ handleLogin }) => {
 
   return (
     <div className="inset-0 w-full bg-gray-800 bg-opacity-40 text-white flex items-center justify-center h-[100vh] absolute z-50">
-      <div className="h-fit relative bg-black md:w-[30%] w-[90%] flex flex-col p-6 px-8 items-center justify-center rounded-md">
+      <div className="h-fit relative bg-black md:w-[30%] w-[80%] flex flex-col p-6 px-8 items-center justify-center rounded-md">
         <img src={logo} alt="" className="h-24" />
         <form
           onSubmit={handleLoginSubmit}

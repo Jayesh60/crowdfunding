@@ -82,7 +82,7 @@ const CampaignDetails = () => {
           setConfirm(false);
         }
       }}
-      className="flex items-center flex-col w-full px-6 md:px-10"
+      className="flex items-center flex-col w-full px-0 md:px-10"
     >
       {dontateCmpt && (
         <div className="fixed inset-0 z-10 h-screen bg-[rgba(0,0,0,0.7)] flex items-center justify-center flex-col ">
@@ -122,7 +122,7 @@ const CampaignDetails = () => {
         </div>
       )}
       <div className="w-full flex md:flex-row flex-col gap-[30px]">
-        <div className="flex-1 flex-col">
+        <div className="md:flex-1 flex-col">
           <div className="flex md:w-[70vw] w-full">
             <Swiper
               modules={[Navigation]}

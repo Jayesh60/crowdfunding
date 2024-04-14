@@ -59,7 +59,6 @@ const Home = () => {
     if (contract) fetchCampaigns();
   }, [address, contract, ActiveCategory]);
 
-
   return (
     <div className="md:px-16 w-full">
       <div className="flex flex-row md:w-[458px] py-3 shadow-search-bar items-center pl-2 border-gray-500 border border-opacity-90 rounded-md mb-5">
@@ -84,9 +83,9 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-2 w-full">
+      <div className="flex flex-col gap-2 w-full pb-4 border-b border-gray-600 mb-5">
         {/* <h1>Categories</h1> */}
-      <div className="flex md:gap-3 pb-2 items-center max-md:justify-center font-semibold">
+        <div className="flex md:gap-4 items-center max-md:justify-center font-semibold">
           {categories.map((item, index) => (
             <p
               key={index}
@@ -94,12 +93,14 @@ const Home = () => {
               className={`${
                 ActiveCategory === item?.value
                   ? activeTheme
-                    ? " text-green font-semibold border-b border-green"
-                    : "  text-black font-semibold border-b border-black"
+                    ? " text-green font-semibold"
+                    : "  text-black font-semibold"
                   : activeTheme
                   ? " text-green hover:border-b hover:border-green"
                   : " text-black hover:border-b hover:border-black"
-              }  max-md:text-xs pb-1 ${activeTheme ? 'border-b border-black': 'border-b'}  cursor-pointer transition duration-300`}
+              }  max-md:text-xs ${
+                activeTheme ? "border-b border-black" : "border-b"
+              }  cursor-pointer transition duration-100`}
             >
               {item?.value}
             </p>
@@ -115,7 +116,7 @@ const Home = () => {
         />
       ) : (
         <DisplayCampaigns
-          title="All Campaigns"
+          title={`${ActiveCategory} Campaigns`}
           isLoading={isLoading}
           campaigns={campaigns}
         />

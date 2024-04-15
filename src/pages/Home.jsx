@@ -4,6 +4,7 @@ import { DisplayCampaigns } from "../components";
 import { useStateContext } from "../context";
 import { search } from "../assets";
 import { categories } from "../constants";
+import { daysLeft } from "../utils";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,15 +20,20 @@ const Home = () => {
   const fetchCampaigns = async () => {
     setIsLoading(true);
     const data = await getCampaigns();
-    // console.log(data)
+
+    const activeCamps = await data.filter(
+      (item) => daysLeft(item.deadline) > 0
+    );
+
+    // console.log(data);
     data.reverse();
     if (ActiveCategory !== "All") {
-      const data2 = await data.filter(
+      const data2 = await activeCamps.filter(
         (item) => item.category === ActiveCategory
       );
       setCampaigns(data2);
     } else {
-      setCampaigns(data);
+      setCampaigns(activeCamps);
     }
     setIsLoading(false);
   };

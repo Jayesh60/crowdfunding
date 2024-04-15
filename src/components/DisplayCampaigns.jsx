@@ -14,12 +14,11 @@ const DisplayCampaigns = ({ title, isLoading, campaigns, profile }) => {
     navigate(`/campaign-details/${campaign.title}`, { state: campaign });
   };
 
-  const dataList = campaigns.filter((item) => {
-    const daysL = daysLeft(item.deadline);
-    return daysL >= 0;
-  });
+  // const dataList = campaigns.filter((item) => {
+  //   const daysL = daysLeft(item.deadline);
+  //   return daysL >= 0;
+  // });
 
-  // console.log('dataFeed', dataList)
 
   return (
     <div className="min-h-screen">
@@ -28,7 +27,7 @@ const DisplayCampaigns = ({ title, isLoading, campaigns, profile }) => {
           activeTheme ? "text-white" : "text-black"
         } font-epilogue font-semibold py-2  `}
       >
-        {title} ({dataList.length})
+        {title} ({campaigns.length})
       </h1>
 
       <div className="flex flex-wrap gap-[26px]">
@@ -40,15 +39,15 @@ const DisplayCampaigns = ({ title, isLoading, campaigns, profile }) => {
           />
         )}
 
-        {!isLoading && dataList.length === 0 && (
+        {!isLoading && campaigns.length === 0 && (
           <p className="font-epilogue font-semibold text-[14px] leading-[30px] text-[#818183]">
             Oopss!! Sorry, There's No Campaigns available
           </p>
         )}
 
         {!isLoading && !profile &&
-          dataList.length > 0 &&
-          dataList.map((campaign) => (
+          campaigns.length > 0 &&
+          campaigns.map((campaign) => (
             <FundCard
               key={uuidv4()}
               {...campaign}

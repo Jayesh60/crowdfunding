@@ -26,7 +26,7 @@ const Home = () => {
     );
 
     // console.log(data);
-    data.reverse();
+    await activeCamps.reverse();
     if (ActiveCategory !== "All") {
       const data2 = await activeCamps.filter(
         (item) => item.category === ActiveCategory

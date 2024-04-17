@@ -8,13 +8,13 @@ const ContactCTA = () => {
         <div className="flex flex-col justify-around px-20 py-5 text-white">
           <div>
             <h1>Contact</h1>
-            <Link className="text-3xl font-medium " to={""}>
-              +919309778157
+            <Link className="text-3xl font-medium " to={"tel:+919999933333"}>
+              +919999933333
             </Link>
           </div>
           <div>
             <h1>Email</h1>
-            <Link className="text-3xl font-medium " to={""}>
+            <Link className="text-3xl font-medium " to={"mailto:contact@fund.in"}>
               contact@fund.in
             </Link>
           </div>

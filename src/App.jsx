@@ -10,6 +10,7 @@ import LoginPage from "./components/LoginPage";
 import SignUpPage from "./components/SignUpPage";
 import { Footer } from "./components/Footer";
 import LandingPage from "./pages/LandingPage";
+import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
   const { activeTheme, setActiveTheme, user, setUser } = useStateContext();
@@ -39,7 +40,7 @@ const App = () => {
     if (!Sessionuser) {
       navigate("/about");
     }
-  }, [user]);
+  }, [user, path]);
 
   return (
     <div
@@ -69,6 +70,7 @@ const App = () => {
 
       <Footer />
       <Toaster />
+      <ScrollToTop/>
     </div>
   );
 };

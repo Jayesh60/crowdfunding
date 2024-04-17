@@ -200,6 +200,7 @@ const CreateCampaign = () => {
                   height="24"
                   src="https://img.icons8.com/ios-filled/50/FA5252/multiply.png"
                   alt="multiply"
+                  className="z-10 bg-light-gray rounded-sm"
                 />
               </span>
             </div>

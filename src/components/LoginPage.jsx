@@ -1,5 +1,5 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { db } from "../utils/firebase";
@@ -14,6 +14,7 @@ const LoginPage = ({ handleLogin }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const { user, setUser } = useStateContext();
+
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });

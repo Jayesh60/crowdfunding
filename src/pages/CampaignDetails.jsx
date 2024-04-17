@@ -50,7 +50,6 @@ const CampaignDetails = () => {
     if (contract) fetchDonators();
   }, [contract, address]);
 
-  const validateDonate = () => {};
 
   const handleDonate = async () => {
     setIsLoading(true);
@@ -94,7 +93,7 @@ const CampaignDetails = () => {
               alt="checked--v1"
             />
             <h1 className="text-2xl font-bold text-black text-center font-epilogue">
-              Thank you for supporting the cause!
+              Thank you for supporting the project!
             </h1>
           </div>
         </div>
@@ -102,7 +101,7 @@ const CampaignDetails = () => {
       {isLoading && <Loader />}
       {confirm && (
         <div className="fixed inset-0 z-10 h-screen bg-[rgba(0,0,0,0.7)] flex items-center justify-center flex-col ">
-          <div className="h-fit relative bg-[#8c6dfd] bg-opacity-80 md:w-[25%] w-[90%] flex flex-col p-3 px-8 items-center justify-center rounded-sm gap-2">
+          <div className="h-fit relative bg-[#8c6dfd] bg-opacity-80 md:w-[35%] w-[90%] flex flex-col px-8 py-4 items-center justify-center rounded-sm gap-2">
             <div className="text-lg flex items-center gap-2 font-semibold text-white text-center">
               <img
                 width="100"
@@ -110,7 +109,7 @@ const CampaignDetails = () => {
                 src="https://img.icons8.com/clouds/100/error.png"
                 alt="error"
               />
-              Are you sure?
+              DO YOU REALLY WANT TO FUND THIS CAMPAIGN?
             </div>
             <button
               onClick={handleDonate}
@@ -203,7 +202,7 @@ const CampaignDetails = () => {
                   {state.name}
                 </h4>
                 <p className="mt-[4px] font-epilogue font-normal text-[12px] text-[#808191]">
-                  {state.owner}
+                  {state?.owner.slice(0,10) + "......." + state?.owner.slice(32) }
                 </p>
               </div>
             </div>
@@ -242,7 +241,7 @@ const CampaignDetails = () => {
                     className="flex justify-between items-center gap-4"
                   >
                     <p className="font-epilogue font-normal text-xs md:text-[16px] text-[#b2b3bd] leading-[26px] break-ll">
-                      {index + 1}. {item.donator}
+                      {index + 1}. {item?.donator?.slice(0,10) + "......." + item?.donator?.slice(32) }
                     </p>
                     <p className="font-epilogue font-normal text-sm md:text-[16px] text-[#808191] leading-[26px] break-ll">
                       {item.donation}
@@ -278,7 +277,7 @@ const CampaignDetails = () => {
             <div className="mt-[30px]">
               <input
                 type="text"
-                placeholder="ETH 0.1"
+                placeholder="Avax 0.1"
                 step="0.01"
                 className="w-full py-[10px] sm:px-[20px] px-[15px] outline-none border-[1px] border-[#3a3a43] bg-transparent font-epilogue text-white text-[18px] leading-[30px] placeholder:text-[#4b5264] rounded-[10px]"
                 value={amount}

@@ -9,7 +9,7 @@ const Hero = ({ user, handleLogin, handleReg }) => {
       <nav className="flex justify-between py-5 z-10 w-full h-full ">
         <div className="flex gap-3 text-white items-center">
           <img src={logo} alt="" className="" />
-          <h1 className="font-bold text-xl">FundDive</h1>
+          <h1 className="font-bold text-xl">FundHive</h1>
         </div>
         <div className="text-green flex md:gap-10 gap-2 text-sm font-medium">
           {user === "" ? (

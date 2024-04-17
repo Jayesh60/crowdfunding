@@ -7,8 +7,17 @@ import LoginPage from "../components/LoginPage";
 import SignUpPage from "../components/SignUpPage";
 
 const LandingPage = () => {
-  const { user } = useStateContext();
-  const [loggedInUser, setLoggedInUser] = useState('');
+  const { user, getTotalNumberOfCampaigns } = useStateContext();
+
+  // useEffect(() => {
+  //   const getCampaigns = async () => {
+  //     const total = await getTotalNumberOfCampaigns();
+  //     console.log(total);
+  //   };
+  //   getCampaigns();
+  // }, []);
+
+  const [loggedInUser, setLoggedInUser] = useState("");
 
   const [loginToggle, setLoginToggle] = useState(false);
   const [regToggle, setRegToggle] = useState(false);

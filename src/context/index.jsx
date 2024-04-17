@@ -103,6 +103,12 @@ export const StateContextProvider = ({ children }) => {
     return parsedDonations;
   };
 
+  const getTotalNumberOfCampaigns = async () => {
+    const total = await contract.call("numberOfCampaigns");
+    console.log(total)
+    return total;
+  };
+
   const [user, setUser] = useState({});
 
   return (
@@ -121,6 +127,7 @@ export const StateContextProvider = ({ children }) => {
         disConnect,
         activeTheme,
         setActiveTheme,
+        getTotalNumberOfCampaigns
       }}
     >
       {children}

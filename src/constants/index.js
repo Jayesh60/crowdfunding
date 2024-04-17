@@ -38,7 +38,7 @@ export const navlinks = [
 
 export const categories = [
   { value: "All", label: "All" },
-  { value: "Education", label: "Education" },
+  // { value: "Education", label: "Education" },
   { value: "Art", label: "Art" },
   { value: "Social Cause", label: "Social Cause" },
   { value: "Design", label: "Design" },

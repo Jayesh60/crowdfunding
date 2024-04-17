@@ -24,7 +24,7 @@ const FundCard = ({
       onClick={handleClick}
     >
       <img
-        src={image}
+        src={image[0]}
         alt="fund"
         className="w-full h-[158px] object-cover rounded-md"
       />

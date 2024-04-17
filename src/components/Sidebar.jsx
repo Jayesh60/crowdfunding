@@ -44,7 +44,7 @@ const Sidebar = () => {
         className="flex gap-2 items-center text-white text-xl font-bold font-epilogue uppercase"
       >
         <Icon styles="w-[34px] h-[34px] bg-[#2c2f32]" imgUrl={logo} />
-        <h1>Fund'Dive</h1>
+        <h1>Fund'Hive</h1>
       </Link>
 
       <div className=" flex justify-between items-center  rounded-[20px] py-3">

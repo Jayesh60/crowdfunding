@@ -49,7 +49,7 @@ const CreateCampaign = () => {
     }
   };
 
-  console.log(ActiveCategory?.value);
+  // console.log(ActiveCategory?.value);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

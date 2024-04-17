@@ -6,7 +6,7 @@ export function Footer() {
     <footer className="w-full flex flex-col justify-between bg-gray-800 bg-footer bg-contain bg-right-bottom bg-no-repeat text-white">
       <div class="p-4 md:p-8 lg:p-10 w-full ">
         <div class="mx-auto max-w-screen-xl text-center flex flex-col items-center">
-          <div class="flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white">
+          <div class="flex justify-center items-center text-2xl font-semibold text-white">
             FUND'HIVE
           </div>
           <p class="my-6 text-gray-500 dark:text-gray-400 w-[70%]">
@@ -14,7 +14,7 @@ export function Footer() {
             share new visions for creative work with the communities that will
             come together to fund them.
           </p>
-          <ul class="flex flex-wrap justify-center items-center mb-6 text-gray-900 dark:text-white">
+          <ul class="flex flex-wrap justify-center items-center mb-6 text-white">
             <li>
               <Link to="/about" class="mr-4 hover:underline md:mr-6 ">
                 About
@@ -58,7 +58,7 @@ export function Footer() {
           <Link className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
             <img src={logo} alt="" />
             <span className="ml-3 text-white text-lg uppercase font-epilogue font-bold">
-              Fundhive
+              FundHive
             </span>
           </Link>
           <p className="text-sm text-gray-200 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-600 sm:py-2 sm:mt-0 mt-4">

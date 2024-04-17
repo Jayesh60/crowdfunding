@@ -50,7 +50,6 @@ const CampaignDetails = () => {
     if (contract) fetchDonators();
   }, [contract, address]);
 
-
   const handleDonate = async () => {
     setIsLoading(true);
     try {
@@ -65,6 +64,8 @@ const CampaignDetails = () => {
   };
 
   useEffect(() => {
+    const data = state.description;
+    console.log(data.split("\n"));
     const interval = setInterval(() => {
       setDontateCmpt(false);
     }, 2000);
@@ -202,7 +203,9 @@ const CampaignDetails = () => {
                   {state.name}
                 </h4>
                 <p className="mt-[4px] font-epilogue font-normal text-[12px] text-[#808191]">
-                  {state?.owner.slice(0,10) + "......." + state?.owner.slice(32) }
+                  {state?.owner.slice(0, 10) +
+                    "......." +
+                    state?.owner.slice(32)}
                 </p>
               </div>
             </div>
@@ -218,9 +221,15 @@ const CampaignDetails = () => {
             </h4>
 
             <div className="mt-[20px]">
-              <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">
-                {state.description}
-              </p>
+              {state?.description?.split("\n").map((item, index) => (
+                <p
+                  className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify"
+                  key={index}
+                >
+                  {item}
+                </p>
+              ))}
+              {/* {state?.description?.split('\n').map((item)=> item)} */}
             </div>
           </div>
 
@@ -241,7 +250,10 @@ const CampaignDetails = () => {
                     className="flex justify-between items-center gap-4"
                   >
                     <p className="font-epilogue font-normal text-xs md:text-[16px] text-[#b2b3bd] leading-[26px] break-ll">
-                      {index + 1}. {item?.donator?.slice(0,10) + "......." + item?.donator?.slice(32) }
+                      {index + 1}.{" "}
+                      {item?.donator?.slice(0, 10) +
+                        "......." +
+                        item?.donator?.slice(32)}
                     </p>
                     <p className="font-epilogue font-normal text-sm md:text-[16px] text-[#808191] leading-[26px] break-ll">
                       {item.donation}

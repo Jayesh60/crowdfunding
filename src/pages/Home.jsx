@@ -24,6 +24,7 @@ const Home = () => {
     const activeCamps = await data.filter(
       (item) => daysLeft(item.deadline) > 0
     );
+    
 
     // console.log(data);
     await activeCamps.reverse();

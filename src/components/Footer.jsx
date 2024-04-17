@@ -46,7 +46,7 @@ export function Footer() {
               </Link>
             </li>
             <li>
-              <Link to="/" class="mr-4 hover:underline md:mr-6">
+              <Link to="/about#contact" class="mr-4 hover:underline md:mr-6">
                 Contact
               </Link>
             </li>

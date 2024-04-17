@@ -11,7 +11,7 @@ const DisplayCampaigns = ({ title, isLoading, campaigns, profile }) => {
   const navigate = useNavigate();
 
   const handleNavigate = (campaign) => {
-    navigate(`/campaign-details/${campaign.title}`, { state: campaign });
+    navigate(`/campaign-details/${campaign.pId}`, { state: campaign });
   };
 
   // const dataList = campaigns.filter((item) => {

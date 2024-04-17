@@ -3,7 +3,7 @@ import { hands } from "../assets";
 
 const ContactCTA = () => {
   return (
-    <div className="h-[70vh] bg-white px-6 md:px-40 py-20 ">
+    <div id="contact" className="h-[70vh] bg-white px-6 md:px-40 py-20 ">
       <div className="h-[40vh] bg-contact flex max-md:flex-col items-center justify-between rounded-xl">
         <div className="flex flex-col justify-around px-20 py-5 text-white">
           <div>

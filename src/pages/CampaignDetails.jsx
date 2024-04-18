@@ -50,16 +50,24 @@ const CampaignDetails = () => {
     if (contract) fetchDonators();
   }, [contract, address]);
 
+  // console.log(state)
+
   const handleDonate = async () => {
     setIsLoading(true);
+    if (state?.target - state?.amountCollected < amount) {
+      toast.error("Amount is greater than goal");
+      setIsLoading(false);
+      return
+    }
     try {
       await donate(state.pId, amount);
       setDontateCmpt(true);
       toast.success("Donated Successfully!");
       setIsLoading(false);
     } catch (err) {
+      // console.log(err)
       setIsLoading(false);
-      toast.error("Something went wrong...");
+      toast.error("Something went wrong..." );
     }
   };
 
